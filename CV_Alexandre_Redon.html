@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alexandre Redon — Développement Commercial & Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #12111a;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --sidebar-bg: #1a1a2e;
+    --text: #2c2a3a;
+    --muted: #6b6880;
+    --line: #e4e1f0;
+    --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f2f0f7;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 1100px;
+    box-shadow: 0 8px 60px rgba(0,0,0,0.12);
+    animation: fadeUp 0.6s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    background: var(--sidebar-bg);
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .avatar-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .avatar {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    border: 2.5px solid var(--gold);
+    background: #2d2d4e;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .name-block { text-align: center; }
+  .name-block h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: #f0ead6;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+  }
+  .name-block p {
+    font-size: 0.65rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+  .gold-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+  .sidebar-section { display: flex; flex-direction: column; gap: 0.6rem; }
+  .sidebar-title {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .info-row {
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .info-row svg { flex-shrink: 0; margin-top: 2px; }
+  .info-row span { font-size: 0.78rem; color: #b8b0cc; line-height: 1.4; }
+  .info-row a { color: var(--gold-light); text-decoration: none; font-size: 0.75rem; }
+  .info-row a:hover { color: var(--gold); }
+  .lang-row { display: flex; justify-content: space-between; align-items: center; }
+  .lang-name { font-size: 0.78rem; color: #d4cce8; font-weight: 500; }
+  .lang-dots { display: flex; gap: 4px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: #2d2d4e; }
+  .dot.filled { background: var(--gold); }
+  .badge-list { display: flex; flex-wrap: wrap; gap: 5px; }
+  .badge {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    border: 0.5px solid rgba(201,168,76,0.35);
+    border-radius: 20px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+  }
+
+  /* ── MAIN ── */
+  .main {
+    padding: 2.5rem 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .main-header {
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 1rem;
+  }
+  .main-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    color: var(--dark);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .main-header p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 4px;
+  }
+  .section-title {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+  .timeline { display: flex; flex-direction: column; gap: 1.2rem; }
+  .tl-item { display: grid; grid-template-columns: 120px 1fr; gap: 1rem; position: relative; }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: 120px;
+    top: 8px; bottom: -1.2rem;
+    width: 1px;
+    background: var(--line);
+  }
+  .tl-item:last-child::before { display: none; }
+  .tl-date {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-align: right;
+    padding-top: 3px;
+    line-height: 1.4;
+  }
+  .tl-body { padding-left: 1.2rem; position: relative; }
+  .tl-body::before {
+    content: '';
+    position: absolute;
+    left: -4px; top: 6px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px var(--gold);
+  }
+  .tl-title {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--dark);
+    line-height: 1.3;
+  }
+  .tl-company {
+    font-size: 0.75rem;
+    color: var(--gold);
+    margin: 2px 0 5px;
+    font-weight: 500;
+  }
+  .tl-desc {
+    font-size: 0.75rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .tl-desc li { margin-left: 1rem; margin-bottom: 2px; }
+  .edu-grid { display: flex; flex-direction: column; gap: 0.9rem; }
+  .edu-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .edu-year {
+    font-size: 0.7rem;
+    color: var(--muted);
+    min-width: 80px;
+    text-align: right;
+    padding-top: 2px;
+  }
+  .edu-body {}
+  .edu-title { font-size: 0.85rem; font-weight: 500; color: var(--dark); }
+  .edu-school { font-size: 0.72rem; color: var(--gold); margin-top: 1px; }
+
+  @media (max-width: 680px) {
+    .page { grid-template-columns: 1fr; }
+    .sidebar { padding: 2rem 1.5rem; }
+    .main { padding: 1.5rem; }
+    .tl-item { grid-template-columns: 90px 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="avatar-wrap">
+      <div class="avatar">AR</div>
+      <div class="name-block">
+        <h1>Alexandre Redon</h1>
+        <p>Senior Commercial</p>
+      </div>
+    </div>
+
+    <div class="gold-line"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Contact</div>
+      <div class="info-row">
+        <svg width="13" height="13" fill="none" stroke="#c9a84c" stroke-width="1.5" viewBox="0 0 16 16"><path d="M8 1.5C5.5 1.5 3.5 3.5 3.5 6c0 3.5 4.5 8.5 4.5 8.5s4.5-5 4.5-8.5c0-2.5-2-4.5-4.5-4.5z"/><circle cx="8" cy="6" r="1.5" fill="#c9a84c" stroke="none"/></svg>
+        <span>Garidech (31) — Occitanie</span>
+      </div>
+      <div class="info-row">
+        <svg width="13" height="13" fill="none" stroke="#c9a84c" stroke-width="1.5" viewBox="0 0 16 16"><rect x="1.5" y="3" width="13" height="10" rx="1.5"/><path d="M1.5 5.5L8 9.5L14.5 5.5" fill="none"/></svg>
+        <span>alex67red@gmail.com</span>
+      </div>
+      <div class="info-row">
+        <svg width="13" height="13" fill="none" stroke="#c9a84c" stroke-width="1.5" viewBox="0 0 16 16"><path d="M3 2h3l1.5 3.5L6 7s1 2 3 3l1.5-1.5L14 10v3c0 .5-.5 1-1 1C5 14 2 7 2 3c0-.5.5-1 1-1z"/></svg>
+        <span>06 70 89 54 50</span>
+      </div>
+      <div class="info-row">
+        <svg width="13" height="13" fill="none" stroke="#c9a84c" stroke-width="1.5" viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2"/><path d="M5 7v4M5 4.5v.5M8 7v4M8 7a2.5 2.5 0 015 0v4" stroke-linecap="round"/></svg>
+        <a href="https://www.linkedin.com/in/alexandre-redon-5387328/" target="_blank">linkedin.com/in/alexandre-redon</a>
+      </div>
+    </div>
+
+    <div class="gold-line"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Langues</div>
+      <div class="lang-row">
+        <span class="lang-name">Français</span>
+        <div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div>
+      </div>
+      <div class="lang-row">
+        <span class="lang-name">Anglais</span>
+        <div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div>
+      </div>
+      <div class="lang-row">
+        <span class="lang-name">Allemand</span>
+        <div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div></div>
+      </div>
+    </div>
+
+    <div class="gold-line"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Atouts</div>
+      <div class="badge-list">
+        <span class="badge">Homme de terrain</span>
+        <span class="badge">Stratège</span>
+        <span class="badge">Tempérament commercial</span>
+        <span class="badge">Mobile</span>
+        <span class="badge">Réactif</span>
+        <span class="badge">Prise d'initiatives</span>
+      </div>
+    </div>
+
+    <div class="gold-line"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Centres d'intérêt</div>
+      <div class="badge-list">
+        <span class="badge">Squash</span>
+        <span class="badge">Rugby</span>
+        <span class="badge">Futsal</span>
+        <span class="badge">Randonnée</span>
+        <span class="badge">Voyages</span>
+        <span class="badge">Asie</span>
+        <span class="badge">UK</span>
+      </div>
+    </div>
+
+    <div class="gold-line"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Compétences</div>
+      <div class="badge-list">
+        <span class="badge">Pack Office</span>
+        <span class="badge">Canva</span>
+        <span class="badge">Digital</span>
+        <span class="badge">KPI's</span>
+        <span class="badge">CRM</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="main-header">
+      <h2>Freelance Développement<br>Commercial & Marketing</h2>
+      <p>Sénior Management · Stratégie Commerciale · BtoB</p>
+    </div>
+
+    <div>
+      <div class="section-title">Expériences professionnelles</div>
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-date">Depuis sept. 2025</div>
+          <div class="tl-body">
+            <div class="tl-title">Freelance Développement Commercial & Marketing</div>
+            <div class="tl-company">AR CONSEIL — Occitanie</div>
+            <div class="tl-desc">Missions BtoB pour réseaux de distribution spécialisés et négoces. Stratégie commerciale, web & IA.</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">Sept. 2023 – Sept. 2025</div>
+          <div class="tl-body">
+            <div class="tl-title">Chef des Ventes</div>
+            <div class="tl-company">ETS BOUTTIER — Groupe NEODIS · Occitanie, Nouvelle-Aquitaine, Bretagne</div>
+            <div class="tl-desc">
+              <ul>
+                <li>Gestion équipe 25 commerciaux itinérants sur 30 départements</li>
+                <li>Définition stratégie commerciale et politique tarifaire</li>
+                <li>Accompagnement terrain, plan d'action, recrutement et formation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">Mai 2022 – Août 2023</div>
+          <div class="tl-body">
+            <div class="tl-title">Chef des Ventes</div>
+            <div class="tl-company">ETLIN SCE FRAIS — Réseau France FRAIS · Grand Est, Luxembourg</div>
+            <div class="tl-desc">
+              <ul>
+                <li>Gestion de 10 commerciaux itinérants et 7 télévendeuses</li>
+                <li>Développement de nouveaux marchés et marchés publics</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">Juin 2019 – Août 2021</div>
+          <div class="tl-body">
+            <div class="tl-title">Directeur Marketing & Communication</div>
+            <div class="tl-company">Gaïatrend — France</div>
+            <div class="tl-desc">Management équipe 10 personnes · Création mix marketing · Stratégie digitale · Membre CODIR</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">Juin 2017 – Juin 2019</div>
+          <div class="tl-body">
+            <div class="tl-title">Responsable Commercial</div>
+            <div class="tl-company">Gaïatrend — Occitanie</div>
+            <div class="tl-desc">CA 1,6 M€ · 10 départements · Animation réseaux revendeurs · Formation équipes commerciales</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">Sept. 2012 – Juin 2017</div>
+          <div class="tl-body">
+            <div class="tl-title">Directeur Commercial co-fondateur</div>
+            <div class="tl-company">Smoke 31/33 — Toulouse / Bordeaux</div>
+            <div class="tl-desc">Management 17 personnes · 8 boutiques · Fidélisation clientèle · Actions promotionnelles</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">Juin 2007 – Sept. 2012</div>
+          <div class="tl-body">
+            <div class="tl-title">Directeur Agence Immobilière</div>
+            <div class="tl-company">Palladio Immobilier — Toulouse</div>
+            <div class="tl-desc">Carte Transactions · 7 agents commerciaux · Gestion locative · Prescripteurs</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">Sept. 2004 – Mai 2008</div>
+          <div class="tl-body">
+            <div class="tl-title">Responsable Marketing & Commercial</div>
+            <div class="tl-company">SCT Toutelectric — Réseau REXEL · Sud-Ouest</div>
+            <div class="tl-desc">Progression CA 2 M€ · +2 pts de marge · Salon professionnel TP BAT · Formation installateurs</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title">Formations & Diplômes</div>
+      <div class="edu-grid">
+        <div class="edu-item">
+          <div class="edu-year">2020</div>
+          <div class="edu-body">
+            <div class="edu-title">Digital Marketing Analytics</div>
+            <div class="edu-school">Massachusetts Institute of Technology (M.I.T) — Online</div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-year">2001 – 2004</div>
+          <div class="edu-body">
+            <div class="edu-title">Diplôme École Supérieure de Commerce — Spécialisation Marketing</div>
+            <div class="edu-school">ESC Pau Eklore-ed School of Management</div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-year">1999 – 2001</div>
+          <div class="edu-body">
+            <div class="edu-title">Classe Préparatoire HEC</div>
+            <div class="edu-school">Lycée Ozenne — Toulouse</div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-year">1999</div>
+          <div class="edu-body">
+            <div class="edu-title">Baccalauréat STT — Commerce, section européenne</div>
+            <div class="edu-school">Lycée Raymond Naves — Toulouse</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+</body>
+</html>
